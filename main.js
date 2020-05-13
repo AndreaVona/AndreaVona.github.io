@@ -18,7 +18,7 @@ if ( 'Accelerometer' in window ) {
 	connectedMessage.innerHTML = 'I am here - part 2';
 	while(i<20) {
 		// every 20 measurements sends them
-		measurements.push(telemetry());
+		//measurements.push(telemetry());
 		i++;
 		if(i==19) {
 			i=0;
