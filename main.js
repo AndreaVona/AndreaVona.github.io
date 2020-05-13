@@ -18,7 +18,7 @@ if ( 'Accelerometer' in window ) {
 	connectedMessage.innerHTML = 'I am here - part 2';
 	while(i<20) {
 		// every 20 measurements sends them
-		//measurements.push(telemetry());
+		measurements.push(telemetry());
 		i++;
 		if(i==19) {
 			i=0;
@@ -34,12 +34,11 @@ if ( 'Accelerometer' in window ) {
 else connectedMessage.innerHTML = 'Accelerometer not supported';
 
 // creates a new telemetry
-/*
 function telemetry() {
 	//let status = document.getElementById('status');
 	var newMeasurement = {};
 	let sensor = new Accelerometer();
-	sensor.addEventListener('reading', function(e) {
+	sensor.addEventListener('onreading', function(e) {
 		//status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
 		newMeasurement.x = e.target.x;
 		newMeasurement.y = e.target.y;
@@ -47,7 +46,7 @@ function telemetry() {
 	});
 	sensor.start();
 	return newMeasurement;
-} */
+}
 
 // called when the client connects 
 function onConnect() {
