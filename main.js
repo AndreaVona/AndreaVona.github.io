@@ -34,6 +34,7 @@ if ( 'Accelerometer' in window ) {
 else connectedMessage.innerHTML = 'Accelerometer not supported';
 
 // creates a new telemetry
+/*
 function telemetry() {
 	//let status = document.getElementById('status');
 	var newMeasurement = {};
@@ -46,7 +47,7 @@ function telemetry() {
 	});
 	sensor.start();
 	return newMeasurement;
-}
+} */
 
 // called when the client connects 
 function onConnect() {
