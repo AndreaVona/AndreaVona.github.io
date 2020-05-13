@@ -44,7 +44,7 @@ function telemetry() {
 		newMeasurement.y = e.target.y;
 		newMeasurement.z = e.target.z;
 	});
-	//sensor.start();
+	sensor.start();
 	return newMeasurement;
 }
 
