@@ -3,6 +3,8 @@ client = new Paho.MQTT.Client("cloud.thingsboard.io", 1883, "pHf66VNROKJlja4uxQo
 var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = 'ciao';
 
+
+
 // set callback handlers 
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
