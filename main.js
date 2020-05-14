@@ -13,7 +13,10 @@ client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 // connect the client 
-client.connect({onSuccess:onConnect});
+client.connect({
+	onSuccess:onConnect,
+	onFailure:onNotConnected
+});
 
 
 
@@ -66,6 +69,13 @@ function onConnect() {
 	//message.destinationName = "World";
 	//client.send(message); 
 }
+
+// called when it doesnt work
+function onNotConnected() {
+	var statusmqtt = document.getElementById("status-mqtt");
+	statusmqtt.innerHTML = "not connected";
+}
+
 // called when the client loses its connection 
 function onConnectionLost(responseObject) {
 	if (responseObject.errorCode !== 0) { 
