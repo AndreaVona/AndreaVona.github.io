@@ -6,7 +6,7 @@ $.getJSON('https://ipapi.co/json/', function(data) {
 // Create a client instance
 client = new Paho.MQTT.Client("cloud.thingsboard.io", 1883, "pHf66VNROKJlja4uxQoq");
 var statusClient = document.getElementById("statusmqtt");
-statusClient.innerHTML = client;
+statusClient.innerHTML = 'ciao';
 
 // set callback handlers 
 client.onConnectionLost = onConnectionLost;
