@@ -59,6 +59,8 @@ function telemetry() {
 function onConnect() {
 	// Once a connection has been made, make a subscription and send a message.
 	//console.log("onConnect");
+	var statusmqtt = document.getElementById("status-mqtt");
+	statusmqtt.innerHTML = "connect";
 	client.subscribe("v1/devices/me/telemetry");
 	//message = new Paho.MQTT.Message("All is up!");
 	//message.destinationName = "World";
