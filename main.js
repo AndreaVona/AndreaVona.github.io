@@ -5,7 +5,7 @@ $.getJSON('https://ipapi.co/json/', function(data) {
 
 // Create a client instance
 client = new Paho.MQTT.Client("cloud.thingsboard.io", 1883, "pHf66VNROKJlja4uxQoq");
-var statusClient = document.getElementById("status-mqtt");
+var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = client;
 
 // set callback handlers 
@@ -62,7 +62,7 @@ function telemetry() {
 function onConnect() {
 	// Once a connection has been made, make a subscription and send a message.
 	//console.log("onConnect");
-	var statusmqtt = document.getElementById("status-mqtt");
+	var statusmqtt = document.getElementById("statusmqtt");
 	statusmqtt.innerHTML = "connect";
 	client.subscribe("v1/devices/me/telemetry");
 	//message = new Paho.MQTT.Message("All is up!");
@@ -72,7 +72,7 @@ function onConnect() {
 
 // called when it doesnt work
 function onNotConnected() {
-	var statusmqtt = document.getElementById("status-mqtt");
+	var statusmqtt = document.getElementById("statusmqtt");
 	statusmqtt.innerHTML = "not connected";
 }
 
