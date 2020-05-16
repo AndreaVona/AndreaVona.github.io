@@ -1,9 +1,9 @@
 // Create a client instance
-client = new Paho.MQTT.Client("cloud.thingsboard.io", 1883, "pHf66VNROKJlja4uxQoq");
+client = new Paho.MQTT.Client("localhost", 9001, "pHf66VNROKJlja4uxQoq");
 var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = 'ciao';
 
-
+// cloud.thingsboard.io
 
 // set callback handlers 
 client.onConnectionLost = onConnectionLost;
@@ -62,9 +62,9 @@ function onConnect() {
 	var statusmqtt = document.getElementById("statusmqtt");
 	statusmqtt.innerHTML = "connect";
 	client.subscribe("v1/devices/me/telemetry");
-	//message = new Paho.MQTT.Message("All is up!");
-	//message.destinationName = "World";
-	//client.send(message); 
+	message = new Paho.MQTT.Message("\"x\":\"0\"");
+	message.destinationName = "v1/devices/me/telemetry";
+	client.send(message); 
 }
 
 // called when it doesnt work
