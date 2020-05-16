@@ -1,5 +1,5 @@
 // Create a client instance
-client = new Paho.MQTT.Client("localhost", 9001, "pHf66VNROKJlja4uxQoq");
+client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "Sensor" + parseInt(Math.random() * 100, 10));
 var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = 'ciao';
 
@@ -14,7 +14,6 @@ client.connect({
 	onSuccess:onConnect,
 	onFailure:onNotConnected
 });
-
 
 
 var measurements = [];
