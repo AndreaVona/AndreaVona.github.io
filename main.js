@@ -40,13 +40,13 @@ if ( 'Accelerometer' in window ) {
 	let status = document.getElementById('status');
 	var newMeasurement = {};
 	let sensor = new Accelerometer();
+	sensor.start();
 	sensor.addEventListener('onreading', function(e) {
 		status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
 		newMeasurement.x = e.target.x;
 		newMeasurement.y = e.target.y;
 		newMeasurement.z = e.target.z;
 	});
-	sensor.start();
 	var message = newMeasurement;
 	/* 
 	
