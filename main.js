@@ -4,6 +4,7 @@ var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = 'ciao';
 
 // cloud.thingsboard.io
+// broker.hivemq.com 8000
 
 // set callback handlers 
 client.onConnectionLost = onConnectionLost;
@@ -20,7 +21,7 @@ var measurements = [];
 var connectedMessage = document.getElementById('status');
 connectedMessage.innerHTML = 'I am here';
 if ( 'Accelerometer' in window ) {
-	var i = 0;
+	/*var i = 0;
 	connectedMessage.innerHTML = 'I am here - part 2';
 	while(i<20) {
 		// every 20 measurements sends them
@@ -35,7 +36,33 @@ if ( 'Accelerometer' in window ) {
 			connectedMessage.innerHTML = "this is what I'm sending" + msg;
 			measurements = [];
 		}
-	}
+	} */
+	//let status = document.getElementById('status');
+	var newMeasurement = {};
+	let sensor = new Accelerometer();
+	sensor.addEventListener('onreading', function(e) {
+		//status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+		newMeasurement.x = e.target.x;
+		newMeasurement.y = e.target.y;
+		newMeasurement.z = e.target.z;
+	});
+	sensor.start();
+	var message = newMeasurement;
+	/* 
+	
+	Code to implement the moving part
+	
+	*/
+	var msg = JSON.stringify(message);
+	
+	//sending data to thingsboard
+    const Http = new XMLHttpRequest();
+    //Cloud device link
+    const url='https://demo.thingsboard.io/api/v1/VhqAq7MkHVacvSARxKLc/telemetry';
+    Http.open("POST",url);
+    Http.send(msg);
+ 
+	setInterval(updateStatus, 100);
 }
 else connectedMessage.innerHTML = 'Accelerometer not supported';
 
