@@ -58,7 +58,7 @@ if ( 'Accelerometer' in window ) {
 	//sending data to thingsboard
     const Http = new XMLHttpRequest();
     //Cloud device link
-    const url='https://demo.thingsboard.io/api/v1/VhqAq7MkHVacvSARxKLc/telemetry';
+    const url='https://cloud.thingsboard.io/api/v1/VhqAq7MkHVacvSARxKLc/telemetry';
     Http.open("POST",url);
     Http.send(msg);
  
