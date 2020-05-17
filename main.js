@@ -1,5 +1,5 @@
 // Create a client instance
-client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "Sensor" + parseInt(Math.random() * 100, 10));
+/*client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "Sensor" + parseInt(Math.random() * 100, 10));
 var statusClient = document.getElementById("statusmqtt");
 statusClient.innerHTML = 'ciao';
 
@@ -15,9 +15,9 @@ client.connect({
 	onSuccess:onConnect,
 	onFailure:onNotConnected
 });
+*/
 
-
-var measurements = [];
+//var measurements = [];
 var connectedMessage = document.getElementById('status');
 connectedMessage.innerHTML = 'I am here';
 if ( 'Accelerometer' in window ) {
@@ -65,7 +65,7 @@ if ( 'Accelerometer' in window ) {
 	setInterval(updateStatus, 100);
 }
 else connectedMessage.innerHTML = 'Accelerometer not supported';
-
+/*
 // creates a new telemetry
 function telemetry() {
 	//let status = document.getElementById('status');
@@ -110,3 +110,4 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
 	console.log("onMessageArrived:"+message.payloadString); 
 }
+*/
