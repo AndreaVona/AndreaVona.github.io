@@ -47,8 +47,7 @@
     Http.open("POST",urlEdge);
     Http.send(msgEdge);
 
-    message.sensor=true;
-    var msgCloud = JSON.stringify(message);
+    var msgCloud = '{\"sensor\":\"true\",\"x\":\"' + message.x + '\",\"y\":\"' + message.y + '\",\"z\":\"' + message.z + '\"}';
     Http.open("POST",urlCloud);
     Http.send(msgCloud);
 
