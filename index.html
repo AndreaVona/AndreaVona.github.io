@@ -31,7 +31,7 @@
     /* Code to implement the moving part */
     var z = newMeasurement.z;
     var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
-    if(movement>0.6) {
+    if(movement>0.75) {
       activity.innerHTML = "Walking " + movement;
     } else {
       activity.innerHTML = "Standing " + movement;
