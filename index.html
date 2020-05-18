@@ -9,9 +9,11 @@
 <body>
   <h1>Accelerometer raw data</h1>
   <div id="status">No data</div>
+  <div id="debug"> <br> <br>Debug</div>
 
   <script>
     let status = document.getElementById('status');
+    let debug = document.getElementById('debug');
     if ( 'Accelerometer' in window ) {
       let sensor = new Accelerometer();
       var newMeasurement = {};
@@ -36,9 +38,10 @@
 	    //sending data to thingsboard
       const Http = new XMLHttpRequest();
       //Cloud device link BzrWszAFPjatKA6aW9ZI VhqAq7MkHVacvSARxKLc
-      const url='https://demo.thingsboard.io:80/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
+      const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
       Http.open("POST",url);
       Http.send(msg);
+      debug.innerHTML = "here";
     }
     else status.innerHTML = 'Accelerometer not supported';
   </script>
