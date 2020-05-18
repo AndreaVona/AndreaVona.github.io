@@ -18,7 +18,7 @@
     let debug = document.getElementById('debug');
     let activity = document.getElementById('activity');
     if ( 'Accelerometer' in window ) {
-      let sensor = new Accelerometer();
+      let sensor = new LinearAccelerationSensor();
       var newMeasurement = {};
 
       sensor.addEventListener('reading', function(e) {
@@ -34,8 +34,7 @@
 	
 	      */
        var z = newMeasurement.z;
-       var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2)) / 9.8;
-       movement = movement-1;
+       var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
        if(movement>0.6) {
         activity.innerHTML = "Walking " + movement;
        } else {
