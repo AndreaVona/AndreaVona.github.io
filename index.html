@@ -49,6 +49,7 @@
 
     message.sensor=true;
     var msgCloud = JSON.stringify(message);
+    Http.open("POST",urlCloud);
     Http.send(msgCloud);
 
     debug.innerHTML = '<br><br>' + msgEdge;
