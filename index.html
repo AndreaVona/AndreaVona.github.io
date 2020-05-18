@@ -23,17 +23,33 @@
         status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
         newMeasurement.x = e.target.x;
 		    newMeasurement.y = e.target.y;
-		    newMeasurement.z = e.target.z;
+        newMeasurement.z = e.target.z;
+        
+        var message = newMeasurement;
+	      /* 
+	
+	      Code to implement the moving part
+	
+	      */
+	      var msg = JSON.stringify(message);
+	
+	      //sending data to thingsboard
+        const Http = new XMLHttpRequest();
+        //Cloud device link BzrWszAFPjatKA6aW9ZI VhqAq7MkHVacvSARxKLc
+        const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
+        Http.open("POST",url);
+        Http.send(msg);
+        debug.innerHTML = '<br><br>' + msg;
       });
       sensor.start();
 
-      var message = newMeasurement;
+      //var message = newMeasurement;
 	    /* 
 	
 	    Code to implement the moving part
 	
 	    */
-	    var msg = JSON.stringify(message);
+	    /*var msg = JSON.stringify(message);
 	
 	    //sending data to thingsboard
       const Http = new XMLHttpRequest();
@@ -41,7 +57,7 @@
       const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
       Http.open("POST",url);
       Http.send(msg);
-      debug.innerHTML = newMeasurement;
+      debug.innerHTML = newMeasurement; */
     }
     else status.innerHTML = 'Accelerometer not supported';
   </script>
