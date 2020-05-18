@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Accelerometer Example | Generic Sensor API</title>  
+  <title>Accelerometer Example | Generic Sensor API</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Ruadhan O'Donoghue">
   <meta charset="UTF-8">
@@ -14,62 +14,42 @@
   <div id="debug"> <br> <br>Debug</div>
 
   <script>
-    let status = document.getElementById('status');
-    let debug = document.getElementById('debug');
-    let activity = document.getElementById('activity');
-    if ( 'Accelerometer' in window ) {
-      let sensor = new LinearAccelerationSensor();
-      var newMeasurement = {};
+  let status = document.getElementById('status');
+  let debug = document.getElementById('debug');
+  let activity = document.getElementById('activity');
+  if ( 'Accelerometer' in window ) {
+    let sensor = new LinearAccelerationSensor();
+    var newMeasurement = {};
 
-      sensor.addEventListener('reading', function(e) {
-        status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-        newMeasurement.x = e.target.x;
-		    newMeasurement.y = e.target.y;
-        newMeasurement.z = e.target.z;
-        
-        var message = newMeasurement;
-	      /* 
-	
-	      Code to implement the moving part
-	
-	      */
-       var z = newMeasurement.z;
-       var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
-       if(movement>0.6) {
-        activity.innerHTML = "Walking " + movement;
-       } else {
-        activity.innerHTML = "Standing " + movement;
-       }
-	      var msg = JSON.stringify(message);
-	
-	      //sending data to thingsboard
-        const Http = new XMLHttpRequest();
-        //Cloud device link BzrWszAFPjatKA6aW9ZI VhqAq7MkHVacvSARxKLc
-        const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
-        Http.open("POST",url);
-        Http.send(msg);
-        debug.innerHTML = '<br><br>' + msg;
-        setInterval( function() {}, 1000);
-      });
-      sensor.start();
+    sensor.addEventListener('reading', function(e) {
+    status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+    newMeasurement.x = e.target.x;
+    newMeasurement.y = e.target.y;
+    newMeasurement.z = e.target.z;
 
-      //var message = newMeasurement;
-	    /* 
-	
-	    Code to implement the moving part
-	
-	    */
-	    /*var msg = JSON.stringify(message);
-	
-	    //sending data to thingsboard
-      const Http = new XMLHttpRequest();
-      //Cloud device link BzrWszAFPjatKA6aW9ZI VhqAq7MkHVacvSARxKLc
-      const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
-      Http.open("POST",url);
-      Http.send(msg);
-      debug.innerHTML = newMeasurement; */
+    var message = newMeasurement;
+    /* Code to implement the moving part */
+    var z = newMeasurement.z;
+    var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
+    if(movement>0.6) {
+      activity.innerHTML = "Walking " + movement;
+    } else {
+      activity.innerHTML = "Standing " + movement;
     }
-    else status.innerHTML = 'Accelerometer not supported';
+    var msg = JSON.stringify(message);
+
+    //sending data to thingsboard
+    const Http = new XMLHttpRequest();
+    //Cloud device link BzrWszAFPjatKA6aW9ZI VhqAq7MkHVacvSARxKLc
+    const url='https://demo.thingsboard.io/api/v1/BzrWszAFPjatKA6aW9ZI/telemetry';
+    Http.open("POST",url);
+    Http.send(msg);
+    debug.innerHTML = '<br><br>' + msg;
+    setInterval( function() {}, 1000);
+  });
+  sensor.start();
+  }
+  else status.innerHTML = 'Accelerometer not supported';
   </script>
 
 </body>
