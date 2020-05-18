@@ -33,8 +33,8 @@
 	      Code to implement the moving part
 	
 	      */
-       var z = Math.abs((newMeasurement.z/9.8)-1);
-       var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
+       var z = newMeasurement.z/9.8;
+       var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2) - 1);
        if(movement>0.8) {
         activity.innerHTML = "Walking " + movement;
        } else {
