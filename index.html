@@ -36,9 +36,9 @@
        var z = newMeasurement.z/9.8;
        var movement = Math.sqrt(Math.pow(newMeasurement.x, 2)+Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
        if(movement>0.5) {
-        activity.innerHTML = "Walking";
+        activity.innerHTML = "Walking " + movement;
        } else {
-        activity.innerHTML = "Standing";
+        activity.innerHTML = "Standing " + movement;
        }
 	      var msg = JSON.stringify(message);
 	
