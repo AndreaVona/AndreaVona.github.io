@@ -5,7 +5,7 @@ if ( 'Accelerometer' in window ) {
   var newMeasurement = {};
 
   sensor.addEventListener('reading', function(e) {
-  container.innerHTML = '<div class="row"><div class="col-sm">x: ' + e.target.x + '</div><div class="col-sm"> y: ' + e.target.y + '</div><div class="col-sm"> z: ' + e.target.z + '</div></div>';
+  container.innerHTML = '<div class="row"><div class="col-sm text-center">x: ' + e.target.x + '</div><div class="col-sm text-center"> y: ' + e.target.y + '</div><div class="col-sm text-center"> z: ' + e.target.z + '</div></div>';
   
   /* 
    <div class="row">
@@ -29,9 +29,9 @@ if ( 'Accelerometer' in window ) {
   var z = newMeasurement.z;
   var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
   if(movement>0.75) {
-	activity.innerHTML = '<div class="row alert alert-success"> Walking </div>';
+	activity.innerHTML = '<div class="row alert alert-success text-center"> Walking </div>';
   } else {
-	activity.innerHTML = '<div class="row alert alert-info"> Standing still </div>';
+	activity.innerHTML = '<div class="row alert alert-info text-center"> Standing still </div>';
   }
   var msgEdge = JSON.stringify(message);
 
