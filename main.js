@@ -35,7 +35,7 @@ if ( 'Accelerometer' in window ) {
   if(movement>0.75) {
 	activity.innerHTML = '<div class=\"alert alert-success text-center\">Walking</div>';
   } else {
-	activity.innerHTML = '<div class=\"row alert alert-info text-center\">Standing still</div>';
+	activity.innerHTML = '<div class=\"alert alert-info text-center\">Standing still</div>';
   }
   var msgEdge = JSON.stringify(message);
 
