@@ -7,32 +7,19 @@ if ( 'Accelerometer' in window ) {
   var newMeasurement = {};
 
   sensor.addEventListener('reading', function(e) {
-  //container.innerHTML = '<div class=\"row\"><div class=\"col-sm text-center\">x: ' + e.target.x + '</div><div class=\"col-sm text-center\"> y: ' + e.target.y + '</div><div class=\"col-sm text-center\"> z: ' + e.target.z + '</div></div>';
   x.innerHTML = "x: " + e.target.x;
   y.innerHTML = "y: " + e.target.y;
   z.innerHTML = "z: " + e.target.z;
-  /* 
-   <div class="row">
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div> 
-  */
   
   newMeasurement.x = e.target.x;
   newMeasurement.y = e.target.y;
   newMeasurement.z = e.target.z;
 
   var message = newMeasurement;
-  /* Code to detect movement, uses .75 as threshold for length of Acc vector */
+  /* Code to detect movement, uses .7 as threshold for length of Acc vector */
   var accZ = newMeasurement.z;
   var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(accZ, 2));
-  if(movement>0.75) {
+  if(movement>0.7) {
 	activity.innerHTML = '<div class=\"alert alert-success text-center\">Walking</div>';
   } else {
 	activity.innerHTML = '<div class=\"alert alert-info text-center\">Standing still</div>';
