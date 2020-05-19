@@ -1,113 +1,43 @@
-// Create a client instance
-/*client = new Paho.MQTT.Client("broker.hivemq.com", 8000, "Sensor" + parseInt(Math.random() * 100, 10));
-var statusClient = document.getElementById("statusmqtt");
-statusClient.innerHTML = 'ciao';
-
-// cloud.thingsboard.io
-// broker.hivemq.com 8000
-
-// set callback handlers 
-client.onConnectionLost = onConnectionLost;
-client.onMessageArrived = onMessageArrived;
-
-// connect the client 
-client.connect({
-	onSuccess:onConnect,
-	onFailure:onNotConnected
-});
-*/
-
-//var measurements = [];
-var connectedMessage = document.getElementById('status');
-connectedMessage.innerHTML = 'I am here';
+let status = document.getElementById('status');
+let debug = document.getElementById('debug');
+let activity = document.getElementById('activity');
 if ( 'Accelerometer' in window ) {
-	/*var i = 0;
-	connectedMessage.innerHTML = 'I am here - part 2';
-	while(i<20) {
-		// every 20 measurements sends them
-		measurements.push(telemetry());
-		i++;
-		if(i==19) {
-			i=0;
-			var msg = JSON.stringify(measurements);
-			message = new Paho.MQTT.Message(msg);
-			message.destinationName = "v1/devices/me/telemetry";
-			client.send(message);
-			connectedMessage.innerHTML = "this is what I'm sending" + msg;
-			measurements = [];
-		}
-	} */
-	let status = document.getElementById('status');
-	var newMeasurement = {};
-	let sensor = new Accelerometer();
-	sensor.start();
-	sensor.addEventListener('onreading', function(e) {
-		status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-		newMeasurement.x = e.target.x;
-		newMeasurement.y = e.target.y;
-		newMeasurement.z = e.target.z;
-	});
-	var message = newMeasurement;
-	/* 
-	
-	Code to implement the moving part
-	
-	*/
-	var msg = JSON.stringify(message);
-	
-	//sending data to thingsboard
-    const Http = new XMLHttpRequest();
-    //Cloud device link
-    const url='https://cloud.thingsboard.io/api/v1/VhqAq7MkHVacvSARxKLc/telemetry';
-    Http.open("POST",url);
-    Http.send(msg);
- 
-	setInterval(updateStatus, 100);
-}
-else connectedMessage.innerHTML = 'Accelerometer not supported';
-/*
-// creates a new telemetry
-function telemetry() {
-	//let status = document.getElementById('status');
-	var newMeasurement = {};
-	let sensor = new Accelerometer();
-	sensor.addEventListener('onreading', function(e) {
-		//status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
-		newMeasurement.x = e.target.x;
-		newMeasurement.y = e.target.y;
-		newMeasurement.z = e.target.z;
-	});
-	sensor.start();
-	return newMeasurement;
-}
+  let sensor = new LinearAccelerationSensor();
+  var newMeasurement = {};
 
-// called when the client connects 
-function onConnect() {
-	// Once a connection has been made, make a subscription and send a message.
-	//console.log("onConnect");
-	var statusmqtt = document.getElementById("statusmqtt");
-	statusmqtt.innerHTML = "connect";
-	client.subscribe("v1/devices/me/telemetry");
-	message = new Paho.MQTT.Message("\"x\":\"0\"");
-	message.destinationName = "v1/devices/me/telemetry";
-	client.send(message); 
-}
+  sensor.addEventListener('reading', function(e) {
+  status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+  newMeasurement.x = e.target.x;
+  newMeasurement.y = e.target.y;
+  newMeasurement.z = e.target.z;
 
-// called when it doesnt work
-function onNotConnected() {
-	var statusmqtt = document.getElementById("statusmqtt");
-	statusmqtt.innerHTML = "not connected";
-}
+  var message = newMeasurement;
+  /* Code to detect movement, uses .75 as threshold for length of Acc vector */
+  var z = newMeasurement.z;
+  var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
+  if(movement>0.75) {
+	activity.innerHTML = "Walking " + movement;
+  } else {
+	activity.innerHTML = "Standing " + movement;
+  }
+  var msgEdge = JSON.stringify(message);
 
-// called when the client loses its connection 
-function onConnectionLost(responseObject) {
-	if (responseObject.errorCode !== 0) { 
-		console.log("onConnectionLost:"+responseObject.errorMessage);
-	} 
-}
+  //sending data to thingsboard
+  const Http = new XMLHttpRequest();
+  // Urls where to send the data
+  const urlEdge='https://demo.thingsboard.io/api/v1/mN9rz1RqDWdPSjDXI552/telemetry';
+  const urlCloud='https://demo.thingsboard.io/api/v1/ekARrVuLSuKZBOoGBKYs/telemetry'; // Wb6jsCSm5TKljCke0sjC
+  
+  Http.open("POST",urlEdge);
+  Http.send(msgEdge);
 
-// called when a message arrives 
-function onMessageArrived(message) {
-	console.log("onMessageArrived:"+message.payloadString); 
+  var msgCloud = '{\"sensor\":\"true\",\"x\":\"' + message.x + '\",\"y\":\"' + message.y + '\",\"z\":\"' + message.z + '\"}';
+  Http.open("POST",urlCloud);
+  Http.send(msgCloud);
+
+  debug.innerHTML = '<br><br>' + msgEdge;
+  setInterval( function() {}, 1000);
+  });
+  sensor.start();
 }
-*/
+else status.innerHTML = 'Accelerometer not supported';
