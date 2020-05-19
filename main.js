@@ -1,12 +1,25 @@
-let status = document.getElementById('status');
-let debug = document.getElementById('debug');
+let container = document.getElementById('container');
 let activity = document.getElementById('activity');
 if ( 'Accelerometer' in window ) {
   let sensor = new LinearAccelerationSensor();
   var newMeasurement = {};
 
   sensor.addEventListener('reading', function(e) {
-  status.innerHTML = 'x: ' + e.target.x + '<br> y: ' + e.target.y + '<br> z: ' + e.target.z;
+  container.innerHTML = '<div class="row"><div class="col-sm">x: ' + e.target.x + '</div><div class="col-sm"> y: ' + e.target.y + '</div><div class="col-sm"> z: ' + e.target.z + '</div></div>';
+  
+  /* 
+   <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div> 
+  */
+  
   newMeasurement.x = e.target.x;
   newMeasurement.y = e.target.y;
   newMeasurement.z = e.target.z;
@@ -16,9 +29,9 @@ if ( 'Accelerometer' in window ) {
   var z = newMeasurement.z;
   var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(z, 2));
   if(movement>0.75) {
-	activity.innerHTML = "Walking " + movement;
+	activity.innerHTML = '<div class="row alert alert-success"> Walking </div>';
   } else {
-	activity.innerHTML = "Standing " + movement;
+	activity.innerHTML = '<div class="row alert alert-info"> Standing still </div>';
   }
   var msgEdge = JSON.stringify(message);
 
@@ -35,9 +48,8 @@ if ( 'Accelerometer' in window ) {
   Http.open("POST",urlCloud);
   Http.send(msgCloud);
 
-  debug.innerHTML = '<br><br>' + msgEdge;
   setInterval( function() {}, 1000);
   });
   sensor.start();
 }
-else status.innerHTML = 'Accelerometer not supported';
+else container.innerHTML = 'Accelerometer not supported';
