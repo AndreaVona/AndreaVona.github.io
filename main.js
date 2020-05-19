@@ -25,8 +25,8 @@ if ( 'Accelerometer' in window ) {
   //sending data to thingsboard
   const Http = new XMLHttpRequest();
   // Urls where to send the data
-  const urlEdge='https://demo.thingsboard.io/api/v1/mN9rz1RqDWdPSjDXI552/telemetry';
-  const urlCloud='https://demo.thingsboard.io/api/v1/ekARrVuLSuKZBOoGBKYs/telemetry'; // Wb6jsCSm5TKljCke0sjC
+  const urlEdge='https://demo.thingsboard.io/api/v1/HrsluvZCQW99jxuqB8Kl/telemetry';
+  const urlCloud='https://demo.thingsboard.io/api/v1/6U605oGsbAImxPYCicDB/telemetry'; // Wb6jsCSm5TKljCke0sjC
   
   Http.open("POST",urlEdge);
   Http.send(msgEdge);
