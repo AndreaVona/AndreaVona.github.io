@@ -56,4 +56,4 @@ if ( 'Accelerometer' in window ) {
   });
   sensor.start();
 }
-else container.innerHTML = 'Accelerometer not supported';
+else y.innerHTML = 'Accelerometer not supported';
