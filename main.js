@@ -1,4 +1,4 @@
-let container = document.getElementsById('container');
+let container = document.getElementById('container');
 let activity = document.getElementById('activity');
 if ( 'Accelerometer' in window ) {
   let sensor = new LinearAccelerationSensor();
