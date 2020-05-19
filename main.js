@@ -33,11 +33,9 @@ if ( 'Accelerometer' in window ) {
   var accZ = newMeasurement.z;
   var movement = Math.sqrt(Math.pow(newMeasurement.x, 2) + Math.pow(newMeasurement.y, 2) + Math.pow(accZ, 2));
   if(movement>0.75) {
-	activity.innerHTML = 'Walking';
-	activity.classList.add("alert alert-success text-center");
+	activity.innerHTML = '<div class=\"alert alert-success text-center\">Walking</div>';
   } else {
-	activity.innerHTML = 'Standing Still';
-	activity.classList.add("alert alert-info text-center");
+	activity.innerHTML = '<div class=\"row alert alert-info text-center\">Standing still</div>';
   }
   var msgEdge = JSON.stringify(message);
 
